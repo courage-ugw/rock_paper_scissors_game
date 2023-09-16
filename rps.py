@@ -65,8 +65,9 @@ class RandomPlayer(Player):
 
 class ReflectPlayer(Player):
     """
-    ReflectPlayer class remembers what move the opponent played last round, and plays that move this round.
-    (So, if you play 'paper' on the first round, a ReflectPlayer will play 'paper' on the second round.)
+    ReflectPlayer class remembers what move the opponent played last round,
+    and plays that move this round.(So, if you play 'paper' on the first round,
+     a ReflectPlayer will play 'paper' on the second round.)
     """
 
     def __init__(self):
@@ -78,7 +79,8 @@ class ReflectPlayer(Player):
         :return: next move (e.g., 'rock' as string)
         """
 
-        if (self.opponent_move in self.player_moves) and (self._call_count > 0):
+        if (self.opponent_move in self.player_moves) and (
+                self._call_count > 0):
             index_of_move = self.player_moves.index(self.opponent_move)
             return self.player_moves[index_of_move]
         self._call_count = 1
@@ -90,9 +92,9 @@ class ReflectPlayer(Player):
 
 class CyclePlayer(Player):
     """
-    CyclePlayer class remembers what move it played last round, and cycles through the different moves.
-    (If it played 'rock' this round, it should play 'paper' in the next round.)
-
+    CyclePlayer class remembers what move it played last round, and cycles
+    through the different moves.(If it played 'rock' this round, it should
+    play 'paper' in the next round.)
     """
 
     def __init__(self):
@@ -110,7 +112,8 @@ class CyclePlayer(Player):
             return self._next_move
 
         index_of_current_move = self.player_moves.index(self._next_move)
-        index_of_next_move = (index_of_current_move + 1) % len(self.player_moves)
+        index_of_next_move = (index_of_current_move + 1) % len(
+            self.player_moves)
         self._next_move = self.player_moves[index_of_next_move]
         return self._next_move
 
@@ -163,8 +166,8 @@ class Game:
     def beats(one, two):
         """
         Executes the game rules.
-        :param one: string representing move of player1(e.g. rock, paper or scissors)
-        :param two: string representing move of player2(e.g. rock, paper or scissors)
+        :param one: string representing move of player1(e.g. rock, or paper)
+        :param two: string representing move of player2(e.g. rock, or paper)
         :return: Returns true or false if the conditions are met
         """
         return (one == 'rock' and two == 'scissors') or \
@@ -173,7 +176,8 @@ class Game:
 
     def round_winner(self, move1, move2):
         """
-        Checks and returns the winner of each round during the game play. Updates each player score.
+        Checks and returns the winner of each round during the game play.
+        Updates each player score.
         :param move1:  move of player1(e.g. rock, paper or scissors) as string
         :param move2: move of player2 as string
         :return: winner of each round as string
@@ -201,7 +205,9 @@ class Game:
         while (move1 != 'quit') and (self._game_round < 10):
             print(f"You played {move1}\nOpponent played {move2}")
             print(self.round_winner(move1, move2))
-            print(f'Score: Player One {self._p1_score}, Player Two {self._p2_score}')
+            print(
+                f'Score: Player One {self._p1_score}, '
+                f'Player Two {self._p2_score}')
             self._game_round += 1
 
             self._p1.learn(move1, move2)
@@ -218,13 +224,16 @@ class Game:
     def announce_winner(self):
         if self._p1_score > self._p2_score:
             print("** Congratulations. You Won! **")
-            print(f" You scored: {self._p1_score} *** Opponent scored: {self._p2_score}")
+            print(f" You scored: {self._p1_score} *** "
+                  f"Opponent scored: {self._p2_score}")
         elif self._p1_score < self._p2_score:
             print("** You Lost! **")
-            print(f"Opponent scored: {self._p2_score} *** You scored: {self._p1_score}")
+            print(f"Opponent scored: {self._p2_score} *** "
+                  f"You scored: {self._p1_score}")
         if self._p1_score == self._p2_score:
             print("** TIE **")
-            print(f" You scored: {self._p1_score} *** Opponent scored: {self._p2_score}")
+            print(f" You scored: {self._p1_score} *** "
+                  f"Opponent scored: {self._p2_score}")
 
 
 def play_game():
@@ -251,7 +260,9 @@ Select the player strategy you want to play against: """)
     # Validates user's input
     user_input = input(game_players)
     while user_input not in game_strategies:
-        print(f'\nError: {user_input} is not a valid option! Please select an option below.')
+        print(
+            f'\nError: {user_input} is not a valid option! '
+            f'Please select an option below.')
         user_input = input(game_players)
 
     print(f"""
